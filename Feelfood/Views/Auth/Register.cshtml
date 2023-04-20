@@ -1,0 +1,43 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+<div>
+    <form>
+        <div class="form-group d-flex">
+            <div>
+                <label for="fname">Firstname</label>
+                <input id="fname" type="text" class="form-control" placeholder="Enter your firstname" asp-for="Fname" />
+            </div>
+            <div>
+                <label for="lname">Lastname</label>
+                <input id="lname" type="text" class="form-control" placeholder="Enter your lastname" asp-for="Lname" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input id="username" type="text" class="form-control" placeholder="Enter your username" asp-for="Username" />
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" class="form-control" placeholder="Enter your email" asp-for="Email" />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" class="form-control" placeholder="Enter your password" asp-for="Password" />
+        </div>
+        <div class="form-group">
+            <label for="cpassword">Confirm password</label>
+            <input id="cpassword" type="password" class="form-control" placeholder="Confirm your password" asp-for="Comfirm_Password" />
+        </div>
+        <div class="form-group">
+            <label for="tel">Tel</label> 
+            <input id="tel" type="tel" class="form-control" placeholder="090xxxxxxx" pattern="[0-9]{10}" asp-for="Tel" />
+        </div>
+        <button type="submit" class="btn btn-primary">register</button>
+        <a class="btn btn-primary" asp-controller="auth" asp-action="index">Back to login</a>
+    </form>
+</div>
+
