@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Feelfood.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
@@ -16,9 +17,9 @@ public class FeelfoodUser : IdentityUser
     public string? FirstName { get; set; }
     [PersonalData]
     [Column(TypeName = "nvarchar(100)")]
-    public string? LastName { get; set;}
-    [PersonalData]
-    [Column(TypeName = "nvarchar(100)")]
-    public string? Telephone { get; set; }
+    public string? LastName { get; set; }
+    public int? JobId { get; set; }
+    public JobModel? Job { get; set; }
+    public ICollection<OrderModel>? Orders { get; set; }
 }
 

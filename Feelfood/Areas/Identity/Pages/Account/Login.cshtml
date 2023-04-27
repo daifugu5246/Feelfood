@@ -3,38 +3,49 @@
 
 @{
     ViewData["Title"] = "Log in";
-    Layout = "AuthLayout";
 }
-<h1>@ViewData["Title"]</h1>
-    <div>
-        <section>
-            <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                    <label asp-for="Input.UserName" class="form-label">Email</label>
-                    <span asp-validation-for="Input.UserName" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
-                    <label asp-for="Input.Password" class="form-label">Password</label>
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="checkbox mb-3">
-                    <label asp-for="Input.RememberMe" class="form-label">
-                        <input class="form-check-input" asp-for="Input.RememberMe" />
-                        @Html.DisplayNameFor(m => m.Input.RememberMe)
-                    </label>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <button id="login-submit" type="submit" class="w-25 btn btn-lg btn-primary me-2">Log in</button>
-                    <a id="register" class="w-25 btn btn-lg btn-primary me-2" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register</a>
-                </div>
-            </form>
-        </section>
+<body style="background-image:linear-gradient(#ffe6b8 10%, #f8e3e3 100%);">
+    <div class="box-form">
+        <div class="left">
+            <div class="overlay">
+                <img id="logo1"  src="~/images/logo-white.png" />
+                <img id="logo2"  src="~/images/logo-2.png" />
+            </div>
+        </div>
+
+        <div class="right">
+            <div id="LoginTXT" style="margin-top:50px;"><h5>@ViewData["Title"]</h5></div>
+            <div class="formArea">
+                <form id="account"method="post">
+                    <hr />
+                    <div class="validation-summary">
+                        <div asp-validation-summary="ModelOnly" class="text-danger custom-validation-summary" role="alert"></div>
+                    </div>
+                    <div class="form-floating">
+                        <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" placeholder="Username"/>
+                        <label asp-for="Input.UserName" class="form-label">Username</label>
+                        <span style="float:left; font-size:1.5vmin;" asp-validation-for="Input.UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Password"/>
+                        <label asp-for="Input.Password" class="form-label">Password</label>
+                        <span style="float:left; font-size:1.5vmin;" asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe" class="form-label">
+                            <input id="check" style="width:13px; background-color:#f8c25c; color:black;" class="form-check-input" asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                    <div id="pressButton" class="d-flex">
+                        <button float="right" id="login-submit" type="submit" class="btn btn-primary">Log in</button>
+                        <a id="register" style="float:right; width:80px;  box-shadow: 0px 4px 20px 0px #F4C000a6; background-image: linear-gradient(135deg, #383838 10%, #000000 100%); font-family:; font-size: 14px; border-radius: 50px; display: inline-block; border: 0; outline: 0;"  id="register" class="btn btn-primary" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+</body>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
