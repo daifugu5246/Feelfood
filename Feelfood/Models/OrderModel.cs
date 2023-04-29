@@ -18,7 +18,7 @@ namespace Feelfood.Models
         public string? Status { get; set; }
         public string? UserId { get; set; }
         public FeelfoodUser? User { get; set; }
-        public int JobId { get; set; }
+        public int? JobId { get; set; }
         public JobModel? Job { get; set; }
 
         public OrderModel() 

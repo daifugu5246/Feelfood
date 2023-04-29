@@ -19,9 +19,9 @@ namespace Feelfood.Models
         public FeelfoodUser? User { get; set; }
         public string? UserId { get; set; }
 
-        public JobModel() {
+        public JobModel()
+        {
             Status = JOBSTATUS.NO_ORDER.ToString();
-            Description = "-";
         }
     }
 }

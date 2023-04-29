@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Choose order";
+}
+<div id="job-list">
+    @if (Model.Count == 0)
+    {
+        <div class="text-center text-muted">
+            <h1>No job Available now</h1>
+        </div>
+    }
+    else
+    {
+        @foreach (var job in Model)
+        {
+            <div>
+                <p>โรงอาหาร: @job.Job.Canteen</p>
+                <p>User: @job.Username</p>
+                <p>Tel: @job.Tel</p>
+                <p>หมายเหตุ: @job.Job.Description</p>
+            </div>
+            <div>
+                <a class="btn btn-danger" asp-controller="Home" asp-action="Addorder" asp-route-id="@job.Job.Id">Choose</a>
+            </div>
+        }
+    }
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

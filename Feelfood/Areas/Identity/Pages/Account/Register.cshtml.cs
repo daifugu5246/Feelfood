@@ -80,7 +80,7 @@ namespace Feelfood.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "*Tel required*")]
             [Display(Name = "Telephone")]
             public string PhoneNumber { get; set; }
-            [Required(ErrorMessage = "*Tel required*")]
+            [Required(ErrorMessage = "*Username required*")]
             [Display(Name = "Username")]
             public string UserName { get; set; }
             /// <summary>
