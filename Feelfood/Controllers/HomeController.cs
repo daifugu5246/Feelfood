@@ -13,7 +13,7 @@ using System.Threading.Tasks.Dataflow;
 
 namespace Feelfood.Controllers
 {
-    [Authorize]   
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -65,6 +65,7 @@ namespace Feelfood.Controllers
                 ViewData["JobId"] = job.Id;
                 ViewData["JobCanteen"] = job.Canteen;
                 ViewData["JobStatus"] = job.Status;
+                ViewData["OrderId"] = job.OrderId;
                 if (job.OrderId == null)
                 {
                     // If there is no order associated with the job, store "-" in ViewData for each order field
@@ -104,7 +105,127 @@ namespace Feelfood.Controllers
             // Return the view with the stored ViewData
             return View(orders);
         }
+        [HttpPost]
+        public IActionResult Index(int jobId)
+        {
+            var UserJob = _db.Jobs.Where(j => j.Id == jobId).Join(_db.Orders,j => j.OrderId,o => o.Id,(job,order) => new
+            {
+                Job = job,
+                Order = order,
+            }).FirstOrDefault();
+            Console.WriteLine(jobId);
+            if (UserJob == null)
+            {
+                return NotFound();
+            }
+            if (UserJob.Job.Status == JOBSTATUS.NO_ORDER.ToString())
+            {
+                UserJob.Job.Status = JOBSTATUS.ON_BUYING.ToString();
+                UserJob.Order.Status = ORDERSTATUS.ON_BUYING.ToString();
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else if (UserJob.Job.Status == JOBSTATUS.ON_BUYING.ToString())
+            {
+                UserJob.Job.Status = JOBSTATUS.ON_GOING.ToString();
+                UserJob.Order.Status = ORDERSTATUS.ON_GOING.ToString();
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> GetPageContent()
+        {
+            // Retrieve the HTML content of the div with ID "page"
+            var user = await _userManager.GetUserAsync(this.User);
+            if (user == null)
+            {
+                // If there is no logged in user, redirect to login page
+                return RedirectToPage("Identity/Account/Login");
+            }
+            else
+            {
+                // If there is a logged in user, get and store their information in ViewData
+                var firstName = user.FirstName;
+                ViewData["FirstName"] = firstName;
+                var lastName = user.LastName;
+                ViewData["LastName"] = lastName;
+                var username = user.UserName;
+                ViewData["username"] = username;
+                var phonenumber = user.PhoneNumber;
+                ViewData["Phone Number"] = phonenumber;
+                var email = user.Email;
+                ViewData["Email"] = email;
+            }
 
+            // Get the job associated with the current user, if any
+            var job = _db.Jobs.Where(u => u.UserId == user.Id).FirstOrDefault();
+            if (job == null)
+            {
+                // If there is no job associated with the current user, store null in ViewData
+                ViewData["Model"] = job;
+            }
+            else
+            {
+                // If there is a job associated with the current user, store its information in ViewData
+                ViewData["Model"] = job;
+                ViewData["JobId"] = job.Id;
+                ViewData["JobCanteen"] = job.Canteen;
+                ViewData["JobStatus"] = job.Status;
+                ViewData["OrderId"] = job.OrderId;
+                if (job.OrderId == null)
+                {
+                    // If there is no order associated with the job, store "-" in ViewData for each order field
+                    ViewData["OrderUsername"] = "-";
+                    ViewData["OrderUserPhone"] = "-";
+                    ViewData["OrderRestaurant"] = "-";
+                    ViewData["OrderMenu"] = "-";
+                    ViewData["OrderDescription"] = "-";
+                }
+                else
+                {
+                    // If there is an order associated with the job, get and store its information in ViewData
+                    var job_Ordered = _db.Jobs.Where(u => u.UserId == user.Id).Join(_db.Orders, j => j.OrderId, o => o.Id, (job, order) => new
+                    {
+                        Job = job,
+                        Order = order,
+                        OrderUser = order.User
+                    }).FirstOrDefault();
+                    if (job_Ordered == null || job_Ordered.OrderUser == null)
+                    {
+                        // If there is no associated user or order for the job, return NotFound
+                        return NotFound();
+                    }
+                    ViewData["OrderUsername"] = job_Ordered.OrderUser.UserName;
+                    ViewData["OrderUserPhone"] = job_Ordered.OrderUser.PhoneNumber;
+                    ViewData["OrderRestaurant"] = job_Ordered.Order.Restaurent;
+                    ViewData["OrderMenu"] = job_Ordered.Order.Menu;
+                    ViewData["OrderDescription"] = job_Ordered.Order.Description;
+                }
+            }
+            var orders = _db.Orders.Where(u => u.User == user).Join(_db.Jobs, o => o.JobId, j => j.Id, (order, job) => new
+            {
+                Job = job,
+                Order = order,
+                JobUser = job.User
+            }).ToList();
+            // Return the HTML content as a partial view
+            return PartialView("_PageContent", orders);
+        }
+        public async Task<IActionResult> GetChooseContent()
+        {
+            var user = await _userManager.GetUserAsync(this.User);
+            if (user == null)
+            {
+                return RedirectToPage("Identity/Account/Login");
+            }
+            var jobs = _db.Jobs.Where(j => j.UserId != user.Id && j.OrderId == null).Join(_db.Users, job => job.UserId, user => user.Id, (job, user) => new {
+                Job = job,
+                Username = user.UserName,
+                Tel = user.PhoneNumber
+            }).ToList();
+            return PartialView("_ChooseContent", jobs);
+        }
         public IActionResult Addjob()
         {
             return View();
@@ -143,7 +264,7 @@ namespace Feelfood.Controllers
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "You have complete your previous job before.");
+                ModelState.AddModelError(string.Empty, "You have to complete your previous job before.");
                 return View(job);
             }
             return RedirectToAction("Index");

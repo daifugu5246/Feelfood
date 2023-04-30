@@ -1,35 +1,78 @@
 ﻿@model Feelfood.Models.JobModel
-
 @{
-    ViewData["Title"] = "Addjob";
+    ViewData["Title"] = "Choose Your Canteen";
+    Layout = "_Layout";
 }
 
-<h1>Addjob</h1>
+<head>
+    <link rel="stylesheet" href="index.cshtml.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">   
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
+    <style>
+        button{
+		border-radius: 35px;
+        width: 120px;
+        height: 40px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        text-align: center;
+        color: #F8F3E3;
+        }
+    </style>
+    
+  </head>
 
-<h4>JobModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Addjob" method="post" asp-controller="Home" asp-action="Addjob">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Canteen" class="control-label"></label>
-                <input asp-for="Canteen" class="form-control" />
-                <span asp-validation-for="Canteen" class="text-danger"></span>
+<body style="background-color:#f8f3e3">
+     <header>
+        <div class=" container-fluid " id="Header">
+            <div class="row">
+                <div class="col-3">
+                    <a href="/Home/Index"><img id="nav-img" src="~/images/logo-navbar2.png" alt="yTOkgn.png" /></a>
+                </div>
+                <div class="col-9">
+                    <a href="/Home/Index">UserProfile</a>
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button id="logout" type="submit" class="nav-link btn btn-link">Logout</button>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </header>
+
+    <div class="page">
+        <div id="TXT1">Choose Your Canteen</div>
+        <form id="addjob-form" method="post" asp-controller="Home" asp-action="Addjob">
+        <div class="area">
+            <div class="box">      
+                    <div class="form">
+                        <label class="form-label">canteen : </label>
+                        <div id="inputZone" class="form-group">
+                            <input id="addjob-canteen" class="form-control" asp-for="Canteen" name="Canteen" placeholder="canteen" />
+                        </div>
+                    </div>
+                    <br /><br>
+                    <div class="form">
+                        <label class="form-label">note : </label>
+                        <div id="inputZone" class="form-group">
+                            <input id="addjob-des" class="form-control" asp-for="Description" name="Description" placeholder="e.g. no veggie" />
+                        </div>
+                    </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+        <div class="BTzone">
+            <div class="BTbox">
+                    <div class="bt1 form-group">
+                        <button id="submit-button" class="button" type="submit" style="background: #526FD5; border:none;">Confirm</button>
+                </div>
+                <div class="bt2">
+                        <button id="cancelBT" class="button" style="border:none; background: #FF2047;"><a class="text-decoration-none text-white" asp-controller="Home" asp-action="Index">Cancel</a></button>
+                </div>
             </div>
+        </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+</body>
+@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+}

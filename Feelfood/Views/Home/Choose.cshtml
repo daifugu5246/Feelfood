@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Choose Deliverer";
+}
+
+<head>
+    <link rel="stylesheet" href="index.cshtml.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
+</head>
+
+<body style="background-color:#f8f3e3">
+    <header>
+        <div class=" container-fluid " id="Header">
+            <div class="row">
+                <div class="col-3">
+                    <a href="https://www.picz.in.th/image/yTOkgn"><img src="https://sv1.picz.in.th/images/2023/04/25/yTOkgn.md.png" alt="yTOkgn.png" /></a>
+                </div>
+                <div class="col-9">
+                    <a href="/Home/Index">UserProfile</a>
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button id="logout" type="submit" class="nav-link btn btn-link">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="page">
+        <div id="TXT1"><h1>Choose Your Deliverer</h1></div>
+        <div class="area">
+            @if (Model.Count == 0)
+            {
+                <div class="box">
+                    <h3>Sorry , there is no deliverer for you</h3>
+                </div>
+            }
+        </div>
+        <div class="BTzone">
+            <div class="BTbox">
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

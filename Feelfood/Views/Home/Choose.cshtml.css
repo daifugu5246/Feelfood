@@ -1,0 +1,176 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+* {
+    font-family: "Nunito", sans-serif;
+    font-style: normal;
+}
+
+body {
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    width: 100%;
+    height: 90px;
+    left: 0px;
+    top: 0px;
+    background: #FCD284;
+    display: flex;
+    align-items: center;
+}
+
+div img {
+    width: 177px;
+    height: 100px;
+}
+
+header div {
+    display: flex;
+    align-items: center;
+}
+
+header .col-9 {
+    display: flex;
+    justify-content: end;
+    gap: 50px;
+}
+
+    header .col-9 a:hover, a:active {
+        color: #F8F3E3;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    header .col-9 a:link, a:visited {
+        color: #242121;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+.row {
+    width: 100%;
+}
+
+#Header {
+    position: relative;
+    width: 100%;
+    height: 85px;
+    left: 0px;
+    top: 0px;
+    background: #FCD284;
+}
+
+.page {
+    min-height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    padding: 40px 0 40px 0;
+}
+
+#TXT1 {
+    width: 100%;
+    text-align: center;
+}
+
+#TXT1 h1 {
+    font-weight: bolder;
+    color: #242121;
+}
+
+.area {
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    width: 100%;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    background-color: #fcd284;
+    height: 350px;
+    border-radius: 35px;
+    width: 45%;
+    margin: auto;
+}
+
+.BTzone {
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    width: 100%;
+}
+
+.BTbox {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    border-radius: 30px;
+    width: 45%;
+    margin: auto;
+}
+
+.box h3 {
+    font-weight: bold;
+    color: dimgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+    overflow: auto;
+    margin: auto;
+}
+
+@media (max-width: 1300px) {
+    .page {
+        padding: 60px 0 60px 0;
+    }
+
+    .box {
+        height: 320px;
+        width: 55%;
+    }
+
+    .BTbox {
+        height: 35px;
+        width: 55%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .page {
+        padding: 80px 0 80px 0;
+    }
+
+    .box {
+        height: 300px;
+        width: 70%;
+    }
+
+    .BTbox {
+        height: 32.5px;
+        width: 70%;
+    }
+}
+
+@media (max-width: 700px) {
+    .page {
+        padding: 100px 0 100px 0;
+    }
+
+    .box {
+        height: 250px;
+        width : 80%;
+    }
+
+    .BTbox {
+        height: 32.5px;
+        width: 80%;
+    }
+}

@@ -29,6 +29,5 @@ enum JOBSTATUS
 {
     NO_ORDER,
     ON_BUYING,
-    ON_GOING,
-    FINISH
+    ON_GOING
 };

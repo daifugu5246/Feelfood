@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/Index.css">
+    <script src="https://kit.fontawesome.com/93280d97ab.js" crossorigin="anonymous"></script>
+</head>
+<div id="userInfo" class="text-center">
+    <div class="d-flex flex-column">
+        <div class="align-self-end">
+            <a id="editprofile" class="btn btn-primary" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"></a>
+        </div>
+        <h1>User Profile</h1>
+    </div>
+    <hr />
+    <div id="profilePic-container">
+        <img id="profilePic" src="~/images/profile.png" />
+    </div>
+    <p>@ViewData["FirstName"]&nbsp;&nbsp;&nbsp;@ViewData["LastName"]</p>
+    <p>Username: @ViewData["username"]</p>
+    <p>Tel: @ViewData["Phone Number"]</p>
+    <p>Email: @ViewData["Email"]</p>
+</div>
+<div id="job">
+    <div class="d-flex justify-content-between h-25">
+        <h1>Your job</h1>
+        <div>
+            <a id="addjob-btn" class="btn btn-primary" asp-controller="Home" asp-action="Addjob">Add job</a>
+        </div>
+    </div>
+    <hr />
+        @if(ViewData["Model"] == null)
+        {
+            <div class="text-center text-muted">
+                <h1>You have no job now.</h1>
+            </div>
+        }
+        else
+        {
+            <p>from User: @ViewData["OrderUsername"]</p>
+            <p>Tel: @ViewData["OrderUserPhone"]</p>
+            <p>Canteen: @ViewData["JobCanteen"]</p>
+            <p>Restaurant: @ViewData["OrderRestaurant"]</p>
+            <p>Menu: @ViewData["OrderMenu"]</p>
+            <p>Description: @ViewData["OrderDescription"]</p>
+            <p>Status: @ViewData["JobStatus"]</p>
+        <div>
+            <a class="btn btn-danger" asp-controller="Home" asp-action="Canceljob" asp-route-id="@ViewData["JobId"]">Cancel</a>
+        </div>
+        <hr />
+        }
+</div>
+<div id="order">
+    <div class="d-flex justify-content-between h-25">
+        <h1>Your Order</h1>
+        <div>
+            <a id="addjob-btn" class="btn btn-primary" asp-controller="Home" asp-action="ChooseOrder">Add order</a>
+        </div>
+    </div>
+    <hr />
+    @if(Model.Count == 0)
+    {
+        <div class="text-center text-muted">
+            <h1>You have no Order now.</h1>
+        </div>
+    }
+    else
+    {
+        @foreach(var order in Model)
+        {
+            <p>Deliver by: @order.JobUser.UserName</p>
+            <p>Tel: @order.JobUser.PhoneNumber</p>
+            <p>Canteen: @order.Order.Canteen</p>
+            <p>Restaurant: @order.Order.Restaurent</p>
+            <p>Menu: @order.Order.Menu</p>
+            <p>Description: @order.Order.Description</p>
+            <p>Status: @order.Order.Status</p>
+        }
+    }
+</div>

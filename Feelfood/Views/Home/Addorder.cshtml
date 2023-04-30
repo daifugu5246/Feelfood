@@ -1,46 +1,95 @@
 ﻿@model Feelfood.Models.AddorderModel
 @{
-    ViewData["Title"] = "Addorder";
+    ViewData["Title"] = "Order Your Canteen";
 }
 
-<h1>Addorder</h1>
+<head>
+    <link rel="stylesheet" href="index.cshtml.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
+    <style>
+        button {
+            border-radius: 35px;
+            width: 120px;
+            height: 40px;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            text-align: center;
+            color: #F8F3E3;
+        }
+    </style>
 
-<h4>OrderModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" asp-action="Addorder">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Order.Canteen" class="control-label"></label>
-                <input type="hidden" asp-for="Order.Canteen" class="form-control" />
-                <input type="hidden" asp-for="Order.JobId" class="form-control" />
-                <input asp-for="Order.Canteen" class="form-control" disabled/>
-                <span asp-validation-for="Order.Canteen" class="text-danger"></span>
+</head>
+
+<body style="background-color:#f8f3e3">
+    <header>
+        <div class=" container-fluid " id="Header">
+            <div class="row">
+                <div class="col-3">
+                    <a href="/Home/Index"><img id="nav-img" src="~/images/logo-navbar2.png" alt="yTOkgn.png" /></a>
+                </div>
+                <div class="col-9">
+                    <a href="/Home/Index">UserProfile</a>
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button id="logout" type="submit" class="nav-link btn btn-link">Logout</button>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Order.Restaurent" class="control-label"></label>
-                <input asp-for="Order.Restaurent" class="form-control" />
-                <span asp-validation-for="Order.Restaurent" class="text-danger"></span>
+        </div>
+    </header>
+
+    <div class="page">
+        <div id="TXT1">Order Your Food</div>
+        <form id="addorder-form" method="post" asp-controller="Home" asp-action="Addorder">
+        <div class="area">
+            <div class="box">
+                    <input type="hidden" asp-for="Order.Canteen" class="form-control" />
+                    <input type="hidden" asp-for="Order.JobId" class="form-control" />
+                    <div class="form d-flex justify-content-between">
+                        <label class="form-label">canteen : </label>
+                        <div id="inputZone">
+                            <input asp-for="Order.Canteen" class="form-control w-75" disabled />
+                        </div>
+                    </div>
+                <br /><br>
+                    <div class="form d-flex justify-content-between">
+                    <label class="form-label">restaurant : </label>
+                        <div id="inputZone">
+                            <input asp-for="Order.Restaurent" class="form-control w-75" placeholder="e.g.ramenz " />
+                            </div>
+                    </div>
+                <br /><br>
+                    <div class="form d-flex justify-content-between">
+                    <label class="form-label">menu : </label>
+                        <div id="inputZone" >
+                            <input asp-for="Order.Menu" class="form-control w-75" placeholder="e.g. TONKOSU SHOYU RAMEN, GOMOKU RAMEN" />
+                        </div>
+                </div>
+                <br /><br>
+                    <div class="form d-flex justify-content-between">
+                    <label class="form-label">note: </label>
+                        <div id="inputZone">
+                            <input asp-for="Order.Description" class="form-control w-75" placeholder="e.g. no veggie" />
+                        </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Order.Menu" class="control-label"></label>
-                <input asp-for="Order.Menu" class="form-control" />
-                <span asp-validation-for="Order.Menu" class="text-danger"></span>
+        </div>
+        <div class="BTzone">
+            <div class="BTbox">
+                <div class="bt1 form-group">
+                        <button class="button" type="submit" style="background: #526FD5; border:none">Confirm</button>
+                </div>
+                <div class="bt2">
+                        <button id="cancelBT" class="button" style="background: #FF2047; border:none;"><a asp-controller="Home" asp-action="Index" class="text-white text-decoration-none">Cancel</a></button>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Order.Description" class="control-label"></label>
-                <input asp-for="Order.Description" class="form-control" />
-                <span asp-validation-for="Order.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+        </div>
         </form>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+</body>
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

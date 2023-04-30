@@ -1,32 +1,95 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-    ViewData["Title"] = "Choose order";
+﻿@{
+    ViewData["Title"] = "Choose Deliverer";
 }
-<div id="job-list">
-    @if (Model.Count == 0)
-    {
-        <div class="text-center text-muted">
-            <h1>No job Available now</h1>
-        </div>
-    }
-    else
-    {
-        @foreach (var job in Model)
-        {
-            <div>
-                <p>โรงอาหาร: @job.Job.Canteen</p>
-                <p>User: @job.Username</p>
-                <p>Tel: @job.Tel</p>
-                <p>หมายเหตุ: @job.Job.Description</p>
-            </div>
-            <div>
-                <a class="btn btn-danger" asp-controller="Home" asp-action="Addorder" asp-route-id="@job.Job.Id">Choose</a>
-            </div>
+
+<head>
+    <meta http-equiv="refresh" content="5">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
+    <style>
+        button {
+            border-radius: 35px;
+            width: 120px;
+            height: 40px;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            text-align: center;
+            color: #F8F3E3;
         }
-    }
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    </style>
+</head>
+
+<body style="background-color:#f8f3e3">
+    <header>
+        <div class=" container-fluid " id="Header">
+            <div class="row">
+                <div class="col-3">
+                    <a href="/Home/Index"><img id="nav-img" src="~/images/logo-navbar2.png" alt="yTOkgn.png" /></a>
+                </div>
+                <div class="col-9">
+                    <a href="/Home/Index">UserProfile</a>
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button id="logout" type="submit" class="nav-link btn btn-link">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="refresh-area" class="page">
+        <div id="TXT1"><h1>Choose Your Deliverer</h1></div>
+        <div class="area">
+            <div class="box">
+                @if (Model.Count == 0)
+                {
+                    <h3>Sorry , there is no deliverer for you.</h3>
+                }else
+                {
+                    <ul class="cards">
+                        @foreach (var job in Model)
+                        {
+                            <li class="card">
+                                <div class="ordererInfo">
+                                    <p><b>canteen :</b> @job.Job.Canteen<br /><b>user :</b> @job.Username<br /><b>Tel. :</b> @job.Tel<br /><b>note :</b> @job.Job.Description </p>
+                                </div>
+                                <div class="buttonCard">
+
+                                    <button class="button" id="BT1" style="background: #FF2047; height: 30px; border: none; width: 100px; color:white; font-size: 14px;"><a asp-controller="Home" asp-action="AddOrder" asp-route-id="@job.Job.Id" class="text-decoration-none text-white">Choose</a></button>
+                                     
+                                </div>
+                            </li>
+                        }
+                        <!-- 1 li class card = 1 orderer -->
+                    </ul>
+                }
+            </div>
+        </div>
+        <div class="BTzone">
+            <a id="back" href="/Home/Index" class="text-white text-decoration-none btn btn-primary"
+               style="padding-top:5px; float:right; width:100px; height: 35px; border-radius: 50px;
+                background-image: linear-gradient(135deg, #383838 10%, #242121 100%); font-size: 14px;
+                display: inline-block; border: 0; outline: 0;">
+                Back
+            </a>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            var currentScroll = $('.box').scrollTop(); // store current scroll position
+            setInterval(function () {
+                $.ajax({
+                    url: "/Home/GetChooseContent",
+                    type: "GET",
+                    success: function (result) {
+                        $('.area').html(result);
+                        $('.box').scrollTop(currentScroll); // set scroll position after refreshing content
+                    }
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,76 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<head>
+    <link rel="stylesheet" href="Register.cshtml.css" />
+</head>
+
+<body style="background-color:#f8f3e3;">
+    <div class="box-form">
+        <div class="left">
+            <div class="overlay">
+                <img id="reglogo1" src="~/images/register(1).png" />
+                <img id="reglogo2" src="~/images/register(2).png" />
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="formArea">
+                <form id="account" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div class="formArea">
+                        <div class="fullName">
+                            <div id="firstName" class="form-floating mb-3">
+                                <input asp-for="Input.FirstName" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                                <label asp-for="Input.FirstName">Firstname</label>
+                                <span style="float:left; font-size:1.5vmin;" asp-validation-for="Input.FirstName" class="text-danger"></span>
+                            </div>
+                            <div id="lastName" class="form-floating mb-3">
+                                <input asp-for="Input.LastName" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                                <label asp-for="Input.LastName">Lastname</label>
+                                <span style="float:left; font-size:1.5vmin;" asp-validation-for="Input.LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                            <label asp-for="Input.UserName">Username</label>
+                            <span style="float:left; font-size:1.5vmin;" asp-validation-for="Input.UserName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                            <label asp-for="Input.Email">Email</label>
+                            <span style="float:left; font-size:1.5vmin;" asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                            <label asp-for="Input.Password">Password</label>
+                            <span style="float:left; font-size:1.5vmin;" asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                            <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                            <span style="float:left; font-size:1.5vmin;" asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                            <label asp-for="Input.PhoneNumber">Tel</label>
+                            <span style="float:left; font-size:2vmin;" asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div id="pressButton"  class="d-flex">
+                            <button id="registerSubmit" type="submit" class="btn btn-primary">Register</button>
+                            <a id="backToLogin" style="float:right; width:fit-content;  box-shadow: 0px 4px 20px 0px #F4C000a6; background-image: linear-gradient(135deg, #383838 10%, #000000 100%); font-size: 14px; border-radius: 50px; display: inline-block; border: 0; outline: 0;" id="register" class="btn btn-primary" asp-page="./Login">Back to Login</a>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

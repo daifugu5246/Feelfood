@@ -1,0 +1,25 @@
+﻿<div class="box">
+    @if (Model.Count == 0)
+    {
+        <h3>Sorry , there is no deliverer for you.</h3>
+    }
+    else
+    {
+        <ul class="cards">
+            @foreach (var job in Model)
+            {
+                <li class="card">
+                    <div class="ordererInfo">
+                        <p><b>canteen :</b> @job.Job.Canteen<br /><b>user :</b> @job.Username<br /><b>Tel. :</b> @job.Tel<br /><b>note :</b> @job.Job.Description </p>
+                    </div>
+                    <div class="buttonCard">
+
+                        <button class="button" id="BT1" style="background: #FF2047; border: none; height: 30px; width: 100px; color:white; font-size: 14px;"><a asp-controller="Home" asp-action="AddOrder" asp-route-id="@job.Job.Id" class="text-decoration-none text-white">Choose</a></button>
+
+                    </div>
+                </li>
+            }
+            <!-- 1 li class card = 1 orderer -->
+        </ul>
+    }
+</div>

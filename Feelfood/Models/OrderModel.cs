@@ -32,6 +32,5 @@ enum ORDERSTATUS
 {
     WAITING,
     ON_BUYING,
-    ON_GOING,
-    FINISH
+    ON_GOING
 };

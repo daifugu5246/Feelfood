@@ -1,68 +1,82 @@
-﻿.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 80px;
-    padding: 5px 0px 5px 0px;
-    line-height: 50px;
-    background-color: #242121;
-    color: #f8f3e3;
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+}
+
+.main {
+    flex-grow: 1;
+    height: fit-content;
+}
+
+footer {
+    width: 100%;
+    height: 60px;
+    left: 0px;
+    right: 0;
+    bottom: 0px;
+    background: #242121;
     align-items: center;
-    text-align: center;
-}
-
-.columns {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-.column1 {
-    flex: 25%;
-    padding: 0px;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    justify-items: left;
 }
 
-.column2 {
-    flex: 50%;
-    padding: 0px;
-    font-size: 12px;
+div img {
+    width: 40px;
+    height: 40px;
+}
+
+footer div {
+    display: flex;
+    align-items: center;
     height: 100%;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    text-align: center;
 }
 
-.column3 {
-    flex: 11%;
-    padding: 0px;
-    font-size: 12px;
+.footerBox {
+    width: 100%;
+    padding: 30px;
+}
+
+footer .column1 {
+    width: 25%;
+    gap: 15px;
+    flex-shrink: 0;
+    float: left;
+}
+
+footer .column2 {
+    display: flex;
     justify-content: center;
-    align-content: center;
-    align-items: center;
     text-align: center;
-    justify-content: right;
+    color: #f8f3e3;
+    width: 50%;
+    font-size: 12px;
+    padding-top: 15px;
+}
+
+footer .column3 {
+    text-align: center;
+    color: #f8f3e3;
+    float: right;
+    justify-content: space-between;
+    width: 25%;
+    font-size: 12px;
 }
 
 @media (max-width: 980px) {
+
     .column1 {
-        flex: 50%;
-        justify-content: left;
+        display: none;
     }
+
     .column2 {
-        flex: 50%;
-        justify-content: right;
+        flex: 100%;
+        padding-top: 0px;
     }
+
     .column3 {
         display: none;
     }
