@@ -59,7 +59,7 @@
                     else
                     {
                     
-                        <ul class="cards">
+                        <ul class="cards" id="cardsJob">
                             <!-- 1 li class card = 1 order / 1 job-->
                             <li class="card">
                                 <div class="orderOwner">
@@ -79,7 +79,7 @@
                                             else if (ViewData["JobStatus"].ToString() == JOBSTATUS.ON_BUYING.ToString())
                                             {
                                                 <button class="button m-2" type="submit" id="BT1" style="background: #526FD5; border:none; height: 25px; width: 75px; color:white; font-size: 12px;">
-                                                    on going
+                                                    On going
                                                 </button>
                                             }else{
 
@@ -130,7 +130,7 @@
                     }
                     else
                     {
-                        <ul id="cards" class="cards">
+                        <ul class="cards">
                         @foreach (var order in Model)
                         { 
                             <!-- 1 li class card = 1 order / 1 job-->
@@ -157,22 +157,27 @@
             </div>
         </div>
     </div>
+    
+</body>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
     <script>
         $(document).ready(function () {
-            var currentScroll = $('.cards').scrollTop(); // store current scroll position
+            var currentScrollY = $('#cardsJob').scrollTop(); // store current scroll position
+            var currentScrollX = $('#cardsJob').scrollLeft(); // store current scroll position
+            console.log(currentScrollX);
+            console.log(currentScrollY);
             setInterval(function () {
                 $.ajax({
                     url: "/Home/GetPageContent",
                     type: "GET",
                     success: function (result) {
                         $('.right').html(result);
-                        $('.cards').scrollTop(currentScroll); // set scroll position after refreshing content
+                        $('#cardsJob').scrollTop(currentScrollY); // set scroll position after refreshing content
+                        $('#cardsJob').scrollLeft(currentScrollX)
                     }
                 });
             }, 1000);
         });
     </script>
-</body>
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
 }

@@ -13,7 +13,7 @@
         else
         {
 
-            <ul class="cards">
+            <ul class="cards" id="cardsJob">
                 <!-- 1 li class card = 1 order / 1 job-->
                 <li class="card">
                     <div class="orderOwner">
@@ -33,7 +33,7 @@
                                 else if (ViewData["JobStatus"].ToString() == JOBSTATUS.ON_BUYING.ToString())
                                 {
                                     <button class="button m-2" type="submit" id="BT1" style="background: #526FD5; border:none; height: 25px; width: 75px; color:white; font-size: 12px;">
-                                        on going
+                                        On going
                                     </button>
                                 }
                                 else
@@ -75,7 +75,7 @@
 <div class="container">
     <div class="topic">
         <div class="TXT">Your︎ ︎ ︎ ︎Order</div>
-        <button class="button"><a class="text-decoration-none text-black" asp-controller="Home" asp-action="ChooseOrder">Order food</a></button>
+        <button class="button" style="border: none;"><a class="text-decoration-none text-black" asp-controller="Home" asp-action="ChooseOrder">Order food</a></button>
     </div>
     <div class="box">
         @if (Model.Count == 0)
@@ -86,7 +86,7 @@
         }
         else
         {
-            <ul id="cards" class="cards">
+            <ul class="cards">
                 @foreach (var order in Model)
                 {
                     <!-- 1 li class card = 1 order / 1 job-->
