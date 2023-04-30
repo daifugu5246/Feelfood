@@ -163,8 +163,8 @@
     <partial name="_ValidationScriptsPartial" />
     <script>
         $(document).ready(function () {
-            var currentScrollY = $('#cardsJob').scrollTop(); // store current scroll position
-            var currentScrollX = $('#cardsJob').scrollLeft(); // store current scroll position
+            var currentScrollY = $('ul').scrollTop(); // store current scroll position
+            var currentScrollX = $('ul').scrollLeft(); // store current scroll position
             console.log(currentScrollX);
             console.log(currentScrollY);
             setInterval(function () {
@@ -173,8 +173,8 @@
                     type: "GET",
                     success: function (result) {
                         $('.right').html(result);
-                        $('#cardsJob').scrollTop(currentScrollY); // set scroll position after refreshing content
-                        $('#cardsJob').scrollLeft(currentScrollX)
+                        $('ul').scrollTop(currentScrollY); // set scroll position after refreshing content
+                        $('ul').scrollLeft(currentScrollX)
                     }
                 });
             }, 1000);
