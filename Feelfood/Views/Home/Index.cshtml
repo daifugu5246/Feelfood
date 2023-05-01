@@ -157,27 +157,23 @@
             </div>
         </div>
     </div>
-    
-</body>
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
     <script>
         $(document).ready(function () {
-            var currentScrollY = $('ul').scrollTop(); // store current scroll position
-            var currentScrollX = $('ul').scrollLeft(); // store current scroll position
-            console.log(currentScrollX);
-            console.log(currentScrollY);
             setInterval(function () {
                 $.ajax({
                     url: "/Home/GetPageContent",
                     type: "GET",
                     success: function (result) {
                         $('.right').html(result);
-                        $('ul').scrollTop(currentScrollY); // set scroll position after refreshing content
-                        $('ul').scrollLeft(currentScrollX)
                     }
                 });
-            }, 1000);
+            }, 10000);
         });
     </script>
+
+
+
+</body>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }
